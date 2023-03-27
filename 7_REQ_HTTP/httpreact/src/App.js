@@ -2,6 +2,9 @@ import './App.css';
 
 import {useState, useEffect } from "react";
 
+// 4 - Custom hook
+import { useFetch } from './hooks/useFetch';
+
 //useState - > Salvar os dados em algum lugar...
 //useEffect - > Favzer a requisição uma vez ou quando precisar
 
@@ -12,10 +15,14 @@ function App() {
   // "products" -> Auxilia a salvar os pordutos
   // "setProducts" -> Auxilia a colocar os produtos em algum lugar...
 
+  // 4 - custom
+  const {data: items} = useFetch(url);
+
   const [name, setName] = useState("")
   const [price, setPrice] = useState("")
 
   // 1 - REsgatando dados
+  /*
   useEffect(() => {
     async function fetchData() {
       // Necesario uma URL base para puxar os dados
@@ -30,6 +37,8 @@ function App() {
     }    
     fetchData();
   }, []);
+*/
+
   /*array de dependencia*/
 
   console.log(products);
@@ -73,7 +82,7 @@ function App() {
     <div className="App">
       <h1>Lista de Produtos</h1>
       <ul>
-        {products.map((product) => (
+        {items.map((product) => (
           <li key={product.id}>
             {product.name} - R$: {product.price}
           </li>
